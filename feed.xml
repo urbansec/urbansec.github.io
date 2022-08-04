@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-08-03T23:10:16-06:00</updated><id>/feed.xml</id><title type="html">Fits and Starts ~ El Blog de Urbansec</title><subtitle>I'm Urbansec and this is my blog. I use it to collect my thoughts about hacking, computers, math, and life.
+</subtitle><author><name>Urbansec</name><email>contact@urbansec.com</email></author><entry><title type="html">Creating a Secure Blog with Jekyll</title><link href="/projects/2022/08/03/creating-a-secure-blog-with-jekyll.html" rel="alternate" type="text/html" title="Creating a Secure Blog with Jekyll" /><published>2022-08-03T22:50:16-06:00</published><updated>2022-08-03T22:50:16-06:00</updated><id>/projects/2022/08/03/creating-a-secure-blog-with-jekyll</id><content type="html" xml:base="/projects/2022/08/03/creating-a-secure-blog-with-jekyll.html">&lt;h2 id=&quot;i-wanted-a-blog&quot;&gt;I Wanted a Blog&lt;/h2&gt;
+&lt;p&gt;There are a lot of reasons you might want to create a blog.
+I wanted a way to share my ideas with others and sometimes I communicate more effectively in writing (and pictures) than speaking out loud.
+I also thought I could use it as a personal knowledge base to document past work on some of my projects.
+The inspiration came in part from a great &lt;a href=&quot;https://www.youtube.com/watch?v=NKHF5VZmCig&quot;&gt;KringleCon talk&lt;/a&gt; by Jack Rhysider, whose podcast (Darknet Diaries) I enjoy quite a lot.
+It seemed appropriate that my first post should be about creating this blog.&lt;/p&gt;
+
+&lt;h2 id=&quot;i-wanted-security&quot;&gt;I Wanted Security&lt;/h2&gt;
+&lt;p&gt;In the past I have used several wiki or other website packages to host KBs and other content via a cpanel-based hosting provider.
+My work style tends to involve putting a bunch of effort into a project, then moving on to something else, and sometimes returning to it.
+In my previous efforts, I didn’t do a good job of updating those software packages regularly, which inevitably lead to some form of hijacking.
+This time I wanted to use a framework that would allow dynamic content editing but “pre-compile” all the content so a static site would be served in the end.
+That is to say, the website would not contain any functionality to make edits to itself.
+Additionally, I wanted a cheap way to host the site reliably.&lt;/p&gt;
+
+&lt;h2 id=&quot;my-solution-github-pages--jekyll&quot;&gt;My Solution: GitHub Pages + Jekyll&lt;/h2&gt;
+&lt;p&gt;One of the first options that caught my attention was &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;.
+It’s great because it’s free, super reliable, and it allows you to create content in Markdown and manage it as a git repository of text files.
+GitHub advertises the static site generator Jekyll as an easy way to create a beautiful blog using GH Pages.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-confounding-number-of-options&quot;&gt;A Confounding Number of Options&lt;/h2&gt;
+&lt;p&gt;Every source I came across asserted that using GH Pages with Jekyll was an extremely easy way to start a blog, and each one recommended a totally different way of doing this.
+It threw me off because it felt like most of these sources must be wrong since they seemed to offer conflicting information.
+The truth is, there are so many ways to use GH Pages and Jekyll together that it is almost impossible to make it not work.
+The most confusing part was figuring out which method was right for me.
+I’m going to outline two different approaches in this post that are very different from each other.
+Hopefully it will provide a foundation even for those whose method of choice is somewhere in the middle.&lt;/p&gt;
+
+&lt;h2 id=&quot;essential-reading&quot;&gt;Essential Reading&lt;/h2&gt;
+&lt;p&gt;There are a few resources that most of the content of this post are drawn from.
+You will probably need to read at least one of them if you want to customize your blog over time.
+I try to breeze over material that these documents cover well.
+They are not prerequisites but you may want to refer to them while working through the methods I outline, or afterwards.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll&quot;&gt;The GitHub Pages documentation for Jekyll&lt;/a&gt; (which I think is more helpful that the Jekyll documentation)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/&quot;&gt;The Jekyll documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/pages&quot;&gt;GitHub Pages documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;a-few-fun-facts&quot;&gt;A Few Fun Facts&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Jekyll is a program written in Ruby that will compile your Markdown blog posts into a template-based site (they’re called “themes”).&lt;/li&gt;
+  &lt;li&gt;You can edit the theme.&lt;/li&gt;
+  &lt;li&gt;You can use other people’s themes.&lt;/li&gt;
+  &lt;li&gt;GH Pages will serve whatever content is in the “publishing source” of the repo (Markdown, HTML, etc).&lt;/li&gt;
+  &lt;li&gt;The “publishing source” can be a folder (including &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt;) or a branch (it is configured in the GH Pages settings panel for the repo).&lt;/li&gt;
+  &lt;li&gt;GitHub will compile your Jekyll site for you if you commit the source files.&lt;/li&gt;
+  &lt;li&gt;Only paid accounts are allowed to use GH Pages with a private repo.&lt;/li&gt;
+  &lt;li&gt;GitHub allows you to edit and commit text files in your repos online.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a-few-important-implications&quot;&gt;A Few Important Implications&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;If you don’t want people reading the source files for your Jekyll site, you either need to upgrade to a paid GitHub account, or you need to commit only the compiled site files.&lt;/li&gt;
+  &lt;li&gt;If you fork someone else’s Jekyll site or template, it becomes your Jekyll site.&lt;/li&gt;
+  &lt;li&gt;In the simplest case, you can create and manage your entire blog through GitHub, with no code or content on your personal device (i.e. you could do the whole thing with a Chromebook or tablet).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-simplest-case&quot;&gt;The Simplest Case&lt;/h2&gt;
+&lt;p&gt;With almost no effort or finesse, you can create a Jekyll blog by forking a template and adding and editing content on GitHub.  There are a few reasons I don’t like this method, but I think it would work fine for a lot of people.  Especially if you are a paying GitHub customer and are allowed to use GH Pages within a private repo.  In this case you can store all your source files in the repo without making them publicly available and your site will still be served properly.&lt;/p&gt;
+
+&lt;p&gt;The default Jekyll theme is called Minima.  Since the most recent version is in the main branch of their GitHub repo, you can fork that to use as the basis for your blog.&lt;/p&gt;
+
+&lt;figure style=&quot;text-align: left; font-style: italic; font-size: smaller; text-indent: 2em; border: none; margin: 0.5em; padding: 0.5em;&quot;&gt;
+&lt;img src=&quot;/assets/img/2022-07-creating-this-blog/m1_fork_minima.png&quot; alt=&quot;Fork Minima&quot; style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; /&gt;
+&lt;figcaption&gt;The Minima GitHub repository&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Fork &lt;a href=&quot;https://github.com/jekyll/minima&quot;&gt;Minima&lt;/a&gt; and name the repo username.github.io where “username” is replaced by your GitHub username.&lt;/li&gt;
+  &lt;li&gt;In the settings for your new repo, navigate to the “Pages” tab.&lt;/li&gt;
+  &lt;li&gt;Under “Source” select the master branch and the root directory.&lt;/li&gt;
+  &lt;li&gt;Click “Save”.&lt;/li&gt;
+  &lt;li&gt;After about a minute you should be able to navigate to https://username.github.io/ and you will see the barenones Minima template content.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;README.md&lt;/code&gt; file contains instructions for installation (which this method circumvents) and customization (most of which involves editing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file).&lt;/li&gt;
+  &lt;li&gt;You will want to clear out or repurpose the post files in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; folder.  Each post must be named with the publish date in YYYY-MM-DD format and a hyphenated title.&lt;/li&gt;
+  &lt;li&gt;Navigate to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory and open &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2016-05-19-super-short-article.md&lt;/code&gt; as an example.&lt;/li&gt;
+  &lt;li&gt;Click the pencil icon to edit and modify the contents.&lt;/li&gt;
+  &lt;li&gt;Commit the changes and wait another minute before refreshing https://username.github.io. You will see the changed article in the table of contents.&lt;/li&gt;
+  &lt;li&gt;There is likely a lot of other content you would want to clear out or customize in the repo as well, but as you can see, it doesn’t show up in the site.  One thing I don’t like about this method is that it feels very messy with extraneous files intended for template development (such as the README.md) that you just don’t need.  The only files included in the Jekyll skeleton are:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;404.html&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about.markdown&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.markdown&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about.markdown&lt;/code&gt; to say something about you and your blog.&lt;/li&gt;
+  &lt;li&gt;Editing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file allows customization of title, description, social media links, color theme, and many other aspects of your site.  It is well commented and documented.  Try changing the “title: “ and then view the changes.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure style=&quot;text-align: left; font-style: italic; font-size: smaller; text-indent: 2em; border: none; margin: 0.5em; padding: 0.5em;&quot;&gt;
+&lt;img src=&quot;/assets/img/2022-07-creating-this-blog/m1_edit_config_yml.png&quot; alt=&quot;Edit Config&quot; style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; /&gt;
+&lt;figcaption&gt;The default _config.yml file&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;That is basically it.  It’s a messy method, but you can have a decent minimalistic blog in about 10 minutes.  There are many &lt;a href=&quot;https://jekyllrb.com/docs/themes/&quot;&gt;themes&lt;/a&gt; available for Jekyll that may work better or worse using this method.  And of course, you can take steps to clean up the mess as you feel like it.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-more-nuanced-case&quot;&gt;The More Nuanced Case&lt;/h2&gt;
+&lt;p&gt;The method I prefer involves maintaining two repos, one public and one private.
+The private repo contains the source files and the public repo is used for the compiled site.
+Jekyll is run locally to compile the site and the output is pushed to the public repo.
+One advantage to this method is that it could be used with any hosting provider, while the previous method only works with GH Pages.
+Another advantage is that it prevents the source files from being available publicly.&lt;/p&gt;
+
+&lt;h3 id=&quot;getting-set-up&quot;&gt;Getting Set Up&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;If you are not a regular git user, you will need to install and configure git, and create a GitHub account.  GitHub has a good &lt;a href=&quot;https://docs.github.com/en/get-started/quickstart/set-up-git&quot;&gt;getting started&lt;/a&gt; page that should help.&lt;/li&gt;
+  &lt;li&gt;Install Ruby and Jekyll by following the OS-specific instructions provided in the &lt;a href=&quot;https://jekyllrb.com/docs/installation/&quot;&gt;Jekyll documentation&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Create a private repo in GitHub to store the source files (call it whatever you want, I will refer to it as “blogdev”).&lt;/li&gt;
+  &lt;li&gt;Create a public repo named username.github.io where “username” is replaced by your GitHub username.&lt;/li&gt;
+  &lt;li&gt;Note: You will not be able to enable Pages until you have committed some files.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;creating-a-site&quot;&gt;Creating a Site&lt;/h3&gt;
+&lt;p&gt;The os-specific instructions &lt;a href=&quot;https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site&quot;&gt;here&lt;/a&gt; will be useful if you can’t use the Linux commands I give below, but I would skip everything before step #7 under “creating your site”.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Clone the empty, private blogdev repo to an appropriate place on your computer.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clone git@github.com:username/blogdev.git&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Move into the folder and initialize a new Jekyll site.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd blogdev&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll new --skip-bundle .&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Find the latest supported version of the github-pages gem &lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;here&lt;/a&gt; (227 at time of writing).&lt;/li&gt;
+  &lt;li&gt;Edit the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; to comment out the line &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem &quot;jekyll&quot;&lt;/code&gt; and add a line below it &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem &quot;github-pages&quot;, &quot;~&amp;gt; GITHUB-PAGES-VERSION&quot;, group: :jekyll_plugins&lt;/code&gt; where “GITHUB-PAGES-VERSION” is replaced with the version number from above.&lt;/li&gt;
+  &lt;li&gt;Save the file and then run Bundler to install Ruby dependencies.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle install&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Test site locally.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll serve&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Navigating to the local site (probably http://127.0.0.1:4000/) should display a generic Jekyll site.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Commit and push the generic site to GitHub.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git add -A&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit -m &quot;Initial Jekyll site source files&quot;&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch -M master&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;customizing-a-site&quot;&gt;Customizing a Site&lt;/h3&gt;
+&lt;p&gt;If you are using a theme (such as the included Minima theme) most of the customization will be done by editing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file and creating new posts in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; folder.
+Themes are somewhat confusing in terms of implementation.
+They are intended to live outside of the source files for your site, and the content of the theme is included in the site during compilation.
+To override any theme-specific setting, you have to copy the appropriate file from the theme location into your site source files and modify it (Jekyll prioritizes the copy during compilation).
+Themes can be downloaded locally or referenced via GitHub repo.
+They can be made available as Ruby gems using Bundler, via git, or other methods.
+Most templates contain instructions explaining various customization options.
+Here, I update to the latest version of the Minima theme by referencing the &lt;a href=&quot;https://github.com/jekyll/minima&quot;&gt;GitHub repo&lt;/a&gt;.
+I could use the same repo via the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remote_theme&lt;/code&gt; option, but I prefer to have the theme files downloaded and updated when I choose.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt;, comment out &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#gem &quot;minima&quot;, &quot;~&amp;gt; 2.5&quot;&lt;/code&gt; and add a line &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem &quot;minima&quot;, github: &quot;jekyll/minima&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Save the file and run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle update&lt;/code&gt; to download the updated theme.&lt;/li&gt;
+  &lt;li&gt;The theme will be downloaded somewhere in your userspace which you can determine using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle info --path minima&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Overwrite your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; with the new Minima default with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp `bundle info --path minima`/_config.yml ./&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; according to your best judgement (it’s well commented). The README included with the theme explains most of the settings.
+    &lt;ul&gt;
+      &lt;li&gt;Note that the setting to enable skins is not included by default.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;You can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll serve&lt;/code&gt; again to see how it looks.&lt;/li&gt;
+  &lt;li&gt;Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about.markdown&lt;/code&gt; to say something about you and your blog.&lt;/li&gt;
+  &lt;li&gt;If you use this procedure with a different theme, the README may list other default content you should edit.&lt;/li&gt;
+  &lt;li&gt;Then push another commit of your customized source files.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git add -A&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit -m &quot;Updated Minima theme and customized config&quot;&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;creating-a-post&quot;&gt;Creating a Post&lt;/h3&gt;
+&lt;p&gt;Posts should be created in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; folder.
+Each post should be a Markdown file with a filename like “YYYY-MM-DD-title-of-post.markdown”.
+When Jekyll compiles the site, it uses the date from the filename in a variety of ways related to the date of the post and location of the source files in the directory structure of the site.&lt;/p&gt;
+
+&lt;p&gt;Each post should begin with a section of “front matter” which is a YAML block that defines metadata for the post such as layout, author, and category.
+Different themes use front matter in their own way, and usually contain sample posts to demonstrate their use.
+In particular, the layout options can vary quite a bit between themes.&lt;/p&gt;
+
+&lt;figure style=&quot;text-align: left; font-style: italic; font-size: smaller; text-indent: 2em; border: none; margin: 0.5em; padding: 0.5em;&quot;&gt;
+&lt;img src=&quot;/assets/img/2022-07-creating-this-blog/m2_front_matter.png&quot; alt=&quot;Front Matter&quot; style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; /&gt;
+&lt;figcaption&gt;An example of front matter&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The Jekyll documentation for &lt;a href=&quot;https://jekyllrb.com/docs/posts/&quot;&gt;posts&lt;/a&gt; and &lt;a href=&quot;https://jekyllrb.com/docs/front-matter/&quot;&gt;front matter&lt;/a&gt; is pretty extensive, so I would recommend reading that to understand the options available.
+Your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; folder should contain a sample created by Jekyll with the current date.
+If you edit the filename and contents to create a test post, and then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll serve&lt;/code&gt; again, you should see the modified post appear.
+You can duplicate that file and create additional posts and those will also show up when you compile the site.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-images&quot;&gt;Adding Images&lt;/h3&gt;
+&lt;p&gt;If you’re making a blog, you will probably want to add images.
+The best way to do this is by creating a new directory to contain them inside the blogdev directory.
+From there you can create additional directory structure if you want.
+Each image can be linked from the post files by referencing the blogdev folder as the root of the file system.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Create a directory to store images in.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkdir assets&lt;/code&gt; (if it doesn’t already exist)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkdir assets/img&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Put an image file in the folder via copy / paste or however you want.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wget http://toastytech.com/evil/billagram2.gif -P ./assets/img/&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add a reference to the image to one of your sample posts.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;![Test image](/assets/img/billagram2.gif&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Rebuild the site with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll serve&lt;/code&gt; and browse to the local URL to confirm the image is displayed.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;publishing-the-site&quot;&gt;Publishing the Site&lt;/h3&gt;
+&lt;p&gt;When you compile the site by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll serve&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll build&lt;/code&gt;, the resulting website is stored in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site&lt;/code&gt; folder.
+The contents of this folder is the only thing you &lt;em&gt;need&lt;/em&gt; to store in your public repo for GH Pages to publish your site.
+If you browse the directory structure you will see that it looks similar to that of the source files, but different.
+If you want to choose a different destination for the Jekyll output, you can do so like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll build --destination &amp;lt;destination/path/&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Depending on your OS and git client, you will likely need to use slightly different commands, but this is the general method for publishing your site.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;If you haven’t built the site already, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll build&lt;/code&gt; within the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blogdev&lt;/code&gt; directory.&lt;/li&gt;
+  &lt;li&gt;Change into the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_sites&lt;/code&gt; folder
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd _sites&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Initialize it for your public repo and push the contents
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git init&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git add -A&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit -m &quot;test publish to GH Pages&quot;&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git branch -M master&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git remote add origin git@github.com:username/username.github.io.git&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push -u origin master&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Wait a minute or so and then browse to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://username.github.io&lt;/code&gt; and you should see your Jekyll site, including the posts you modified.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;continued-use&quot;&gt;Continued Use&lt;/h3&gt;
+&lt;p&gt;The basic idea for continuing to build your site is to add more posts, customize your theme, etc. and continue pushing modified source files to the private repo.
+When you’re ready to publish a change to your site you can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll build&lt;/code&gt; to build the site locally.
+Then change to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site&lt;/code&gt; directory, and push the updated site to your public repo.&lt;/p&gt;
+
+&lt;p&gt;As mentioned above, any time you want to override a theme setting, you need to copy the file from the theme source to the approriate location in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blogdev&lt;/code&gt; folder, and then modify it.
+The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle info --path minima&lt;/code&gt; command is very useful for locating the theme files if they reside on your computer.
+If you’re using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remote_theme&lt;/code&gt; option, you will need to download files from the theme’s GitHub repo as necessary.
+More on customizing and creating &lt;a href=&quot;https://jekyllrb.com/docs/themes/&quot;&gt;Jekyll themes&lt;/a&gt; can be found in the Jekyll documentation&lt;/p&gt;
+
+&lt;h2 id=&quot;variations-on-a-theme&quot;&gt;Variations on a Theme&lt;/h2&gt;
+&lt;p&gt;As I mentioned before, there are lots of ways to use Jekyll on GH Pages successfully.
+Bits and pieces of the two methods above can be combined in different ways, for example.
+Here are some small variations that might be helpful.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-remote-themes&quot;&gt;Using Remote Themes&lt;/h3&gt;
+&lt;p&gt;Themes that are hosted on GitHub can be referenced directly in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file without ever downloading them locally.
+In &lt;a href=&quot;#the-more-nuanced-case&quot;&gt;The More Nuanced Case&lt;/a&gt;, we modify the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; and use bundler to get the latest Minima code from GitHub.
+Instead, we could leave the repo out of the Gemfile, and instead edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; to replace the line &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;theme: minima&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remote_theme: jekyll/minima&lt;/code&gt;.
+This will include theme content from the github repo each time the site is built.
+If you are committing your source files to a public repo and having GitHub build your site, everything should work automatically.
+If you are building the site locally, you will need to have the github-pages gem included in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; as previously described.&lt;/p&gt;
+
+&lt;h3 id=&quot;fork-theme-to-private-repo&quot;&gt;Fork Theme to Private Repo&lt;/h3&gt;
+&lt;p&gt;A middle ground method that might be useful would be forking a template to a private repo, then cloning it and building your site locally, and uploading the compiled site to your public repo.
+You would still need to set up git, Ruby, and Jekyll on your computer.
+It might avoid some snags involved in working with templates.
+This also highlights that you can start a blog using &lt;a href=&quot;#the-simplest-case&quot;&gt;The Simplest Case&lt;/a&gt;, wait until you have built some momentum, and then transition to &lt;a href=&quot;#the-more-nuanced-case&quot;&gt;The More Nuanced Case&lt;/a&gt; for a long-term strategy.&lt;/p&gt;
+
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing Thoughts&lt;/h2&gt;
+&lt;p&gt;It would be great if GitHub and / or Jekyll would provide a repo you can clone that contains the base skeleton files for a Jekyll site and a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; file that includes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remote_theme: jekyll/minima&lt;/code&gt;.
+Then you could create a proper site without needing to install Jekyll at all.&lt;/p&gt;
+
+&lt;p&gt;Writing in Markdown can be frustrating at first if you are used to a normal word processor (like most people).
+Using a text editor that has a good Markdown preview mode makes it a lot easier.
+I use &lt;a href=&quot;https://vscodium.com/&quot;&gt;VSCodium&lt;/a&gt;, which is the open source version of &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt;.
+I also found the article &lt;a href=&quot;https://opensource.com/article/19/4/write-git&quot;&gt;How writers can get work done better with Git&lt;/a&gt;, by Seth Kenlon very helpful for the less technical aspects of blogging in Markdown.&lt;/p&gt;
+
+&lt;p&gt;There is a lot to know about GH Pages and Jekyll.
+You should definitely continue reading about how to use GH Pages and Jekyll beyond this article.
+Hopefully this article will help someone get started in less time than it took me.&lt;/p&gt;
+
+&lt;p&gt;If you found this helpful or have suggestions for improvements, hit me up on Twitter or via email and let me know.
+Thanks for reading!&lt;/p&gt;</content><author><name>Urbansec</name><email>contact@urbansec.com</email></author><category term="projects" /><summary type="html">I Wanted a Blog There are a lot of reasons you might want to create a blog. I wanted a way to share my ideas with others and sometimes I communicate more effectively in writing (and pictures) than speaking out loud. I also thought I could use it as a personal knowledge base to document past work on some of my projects. The inspiration came in part from a great KringleCon talk by Jack Rhysider, whose podcast (Darknet Diaries) I enjoy quite a lot. It seemed appropriate that my first post should be about creating this blog.</summary></entry></feed>
